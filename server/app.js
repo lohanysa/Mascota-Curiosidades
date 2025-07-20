@@ -7,10 +7,14 @@ app.use(cors()) //esto es para que se pueda consumir desde el front
 //app.use(express.urlencoded({extended:true})) //esto es para que se pueda consumir desde el front
 const { rutaUser } = require("./routes/userRouter")
 const { dogRoutes } = require("./routes/dogRoutes")
+const { routerCat } = require("./routes/catRoutes")
 app.use(express.json())
 
 app.set('port', process.env.PORT || 6000) //esta es una variable 
 
+
+
+app.use('/api/cats', routerCat);
 app.use('/api/dogs', dogRoutes);
 app.use('/usuario',rutaUser)
 require('./controllers/bd.controller')
