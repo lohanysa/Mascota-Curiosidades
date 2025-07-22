@@ -1,0 +1,38 @@
+body {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.login-box {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+}
+
+.form-control::placeholder {
+  color: #ccc;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.footer-text {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 20px;
+  color: #ddd;
+}
