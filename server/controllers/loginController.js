@@ -17,10 +17,10 @@ const CrearUser = async (req, res)=>{
         })
         //esto guarda la info en la base de datos
         await user.save()
-        return res.status(202).json({mensaje:"ok", data: user})
+        return res.status(202).json({status:true, mensaje:"se creo el usuario correctamente"})
 
     }catch(error){
-        return res.status(500).json({ status: false, message: error })
+        return res.status(500).json({ status: false, mensaje: error.message || error })
     }
 
 }
