@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../style/Login.css';
 
 const Registro = () => {
@@ -17,19 +17,22 @@ const Registro = () => {
           password: document.getElementById('password').value
         })
       });
-      // Si el backend responde con 400/500, entra aquí
+      // Si el back responde con 500, entra aquí
       if (!response.ok) {
-        const errorData = await response.json(); // Lee el mensaje de error del backend
-        throw new Error(errorData.mensaje); // Lanza el mensaje para el catch
+        const errorData = await response.json();
+        throw new Error(errorData.mensaje); 
       }
       const data = await response.json();
 
 
       if (data.status) { // Si status === true
         alert(data.mensaje);
-         window.location.href = '/login';
+        if (data.data) {
+          localStorage.setItem('nuevoUsuario', JSON.stringify(data.data));
+        }
+        window.location.href = '/login';
       } else {
-         throw new Error(data.mensaje || data.message || 'Error');
+        throw new Error(data.mensaje || data.message || 'Error');
       }
     } catch (error) {
       console.error('Error:', error);

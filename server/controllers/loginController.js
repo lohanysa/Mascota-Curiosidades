@@ -30,14 +30,14 @@ const login= async (req, res)=>{
 
        const usuario = await RegistrarUser.findOne({ username: req.body.username })
         if(!usuario){
-            return res.status(500).json({status:false, message : "usuario incorrecta"})
+            return res.status(500).json({status:false, message : "usuario o contraseña incorrecta"})
         }
         //despues verifica el user
         if(!bcrypt.compareSync(req.body.password, usuario.password)){
-             return res.status(500).json({status:false, message : "contraseña"})
+             return res.status(500).json({status:false, message : "usuario o contraseña incorrecta"})
         }
         //y por ultimo el token
-        const token = jwt.sign({usuario: usuario.username, nombre:usuario.full_name}, process.env.localkey,{expiresIn:'3600s'})
+        const token = jwt.sign({usuario: usuario.username, nombre:usuario.full_name}, process.env.localkey,{expiresIn:'5h'})
         return res.status(200).json({token:token})
         //console.log("por ahora todo bien ")
     }catch(error){

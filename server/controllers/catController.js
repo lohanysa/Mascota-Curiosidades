@@ -16,7 +16,11 @@ const getRandomCat = async (req, res) => {
     const cat = response.data[0];
     res.json({
       image: cat.url,
-      id: cat.id
+      id: cat.id,
+      description: breedData.description,
+      temperament: breedData.temperament,
+      origin: breedData.origin
+      
     });
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener imagen aleatoria' })
