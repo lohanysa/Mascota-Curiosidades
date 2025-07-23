@@ -1,16 +1,16 @@
-/*body {
-  background: linear-gradient(to right, #6a11cb, #2575fc);
-  height: 100vh;
-  width: 150%;
+body {
+  background: url('/imagen/fondo.jpg') center center no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-}*/
+  color: darkolivegreen;
+}
 
 .login-box {
   background-color: rgba(0, 0, 0, 0.3);
-  padding: 40px;
+  padding: 100px;
   border-radius: 10px;
   width: 100%;
   max-width: 400px;

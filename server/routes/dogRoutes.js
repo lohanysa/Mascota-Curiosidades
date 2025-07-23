@@ -11,8 +11,8 @@ const {
 
 
 
-dogRoutes.get('/random', getRandomDogImage);
-dogRoutes.get('/breed/:breed', getDogByBreed);
+dogRoutes.get('/random',autenticacion, getRandomDogImage);
+dogRoutes.get('/breed/:breed',autenticacion, getDogByBreed);
 
 module.exports = {
     dogRoutes    }

@@ -1,11 +1,5 @@
 /* src/components/WelcomePage.css */
-body {
-  background-color: #fdf6e3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: darkolivegreen;
-}
+
 
 .welcome-container {
   display: flex;
