@@ -36,10 +36,14 @@ const autenticacion =(req, res, next)=>{
     //esto se aplica a la ruta que se quiere protegen 
     try{
         const token = req.headers["authorization"].split(" ")[1] //aqui es para agarar el token que se envia , el esplit es para quitar la palabra beer que va con el token
+        
+        if(!token){
+            return res.status(401).json({status: false, mensaje: "No se ha proporcionado un token de autenticación"})
+        }
 
         jwt.verify(token, process.env.localkey, (error, data)=>{
             if(error){
-                return res.status(500).json({status: false, menssage: error.message})
+                return res.status(500).json({status: false, mensaje: "Error al verificar el token"})
             }
             req.data = data//se adiciona la data en el req
             //la data es el nombre y usuario que se envia al crear el token 

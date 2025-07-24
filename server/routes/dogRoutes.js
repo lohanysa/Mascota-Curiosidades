@@ -1,6 +1,6 @@
 
 const express = require('express')
-
+const {autenticacion } = require('../middleware/autenticacionMiddleware.js')
 const dogRoutes = express.Router()
 
 const {

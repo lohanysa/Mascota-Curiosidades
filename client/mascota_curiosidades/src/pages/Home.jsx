@@ -1,8 +1,10 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
-
+import Navbar from '../components/navbar';
 const Home = () => {
   return (
+    <>
+    <Navbar />
     <div className="home-page">
       <h1 className="text-center my-4">Buscador de Razas de Mascotas</h1>
       <div className="container">
@@ -13,7 +15,7 @@ const Home = () => {
         </div>
       </div>
       
-      {/* Puedes agregar más contenido aquí debajo del SearchBar */}
+      {/* me gustaria poner un scrip que se ejecuta cada 10 segundos y trae info de geminis, como datos curiosos etc.*/}
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
@@ -23,6 +25,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

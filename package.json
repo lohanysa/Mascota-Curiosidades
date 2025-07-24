@@ -2,13 +2,7 @@
   "devDependencies": {
     "concurrently": "^9.2.0"
     
-  },
+  }
 
-  "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd server && node app.js",
-    "client": "cd client/mascota_curiosidades && npm run dev"
-
-    }
   
 }

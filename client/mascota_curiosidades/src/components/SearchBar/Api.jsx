@@ -36,15 +36,15 @@ export const getRandomImage = async (searchType) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      //'Authorization': `Bearer ${localStorage.getItem('token')}`
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
   });
   
   if (!response.ok) {
-    throw new Error('Error al obtener imagen aleatoria');
+    throw new Error('Error al obtener imagen aleatoria')
   }
 
-  return await response.json();
+  return await response.json()
 };
 
 export const saveImage = async (imageData) => {
@@ -52,11 +52,11 @@ export const saveImage = async (imageData) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('token')}` // si usas autenticación
+      'Authorization': `Bearer ${localStorage.getItem('token')}` 
     },
     body: JSON.stringify(imageData)
 
-  });
+  })
 
   if (!response.ok) {
     const errorData = await response.json();
