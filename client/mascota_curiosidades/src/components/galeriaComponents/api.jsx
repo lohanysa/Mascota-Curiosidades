@@ -28,8 +28,28 @@ const API_AllImages = () => {
     allImages()
   }, []);
 
+ 
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:4040/api/images/delete/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
 
-return (
+      if (!response.ok) {
+        throw new Error('Error al eliminar la imagen')
+      }
+
+      
+      setImages(images.filter(img => img._id !== id))
+    } catch (error) {
+      console.error('Error al eliminar la imagen:', error)
+    }
+  };
+
+  return (
     <div className="row">
       {images.map((img) => (
         <div key={img._id} className="col-md-4 mb-4">

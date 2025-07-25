@@ -55,9 +55,32 @@ const autenticacion =(req, res, next)=>{
     }
 }
 
+const verificarToken = (req, res, next) => {
+    try {
+        const authHeader = req.headers["authorization"];
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return res.status(401).json({ status: false, mensaje: "No se ha proporcionado un token válido" });
+        }
+        const token = authHeader.split(" ")[1];
+
+        jwt.verify(token, process.env.localkey, (error, decoded) => {
+            if (error) {
+                if (error.name === "TokenExpiredError") {
+                    return res.status(401).json({ status: false, mensaje: "El token ha expirado" });
+                }
+                return res.status(401).json({ status: false, mensaje: "Token inválido" });
+            }
+            req.data = decoded;
+            next();
+        });
+    } catch (error) {
+        return res.status(500).json({ mensaje: "Hubo un error en la autenticación", error });
+    }
+};
 
 module.exports= {
     UserRegistro,
     inicio,
-    autenticacion
+    autenticacion,
+    verificarToken
 }

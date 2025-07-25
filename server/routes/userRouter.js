@@ -1,12 +1,12 @@
 const express = require('express')
-const { CrearUser, login, autenticacionControl } = require('../controllers/loginController')
-const { UserRegistro, inicio, autenticacion } = require('../middleware/autenticacionMiddleware.js')
+const { CrearUser, login, autenticacionControl,updateFullName } = require('../controllers/loginController')
+const { UserRegistro, inicio, autenticacion,verificarToken } = require('../middleware/autenticacionMiddleware.js')
 const rutaUser = express.Router()
 
 rutaUser.post('/registro',UserRegistro , CrearUser)
 rutaUser.post('/login',inicio ,login)
-rutaUser.put('/profile',autenticacion, autenticacionControl)
-rutaUser.put('/update',autenticacion, autenticacionControl)
+rutaUser.get('/profile',verificarToken, autenticacionControl)
+rutaUser.put('/update',verificarToken, updateFullName)
 
 module.exports={
     rutaUser

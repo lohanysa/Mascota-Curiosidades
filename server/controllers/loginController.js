@@ -47,24 +47,64 @@ const login= async (req, res)=>{
 
 
 
-const autenticacionControl = async(req, res)=>{
+const autenticacionControl = async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ message: "Token no proporcionado" });
+        }
+        const token = authHeader.split(' ')[1];
 
-    try{
+        const decoded = jwt.verify(token, process.env.localkey);
 
-    const usuario = await RegistrarUser.findOne({ username: req.data.usuario }).select('-password') //que busque el perfil pero sin traer el password
+        // Buscar solo por username
+        const usuario = await RegistrarUser.findOne({ username: decoded.usuario }).select('-password');
+        if (!usuario) {
+            return res.status(401).json({ message: "usuario no encontrado" });
+        }
 
-    if(!usuario){
-        return res.status(401).json({message:"usuario no encontrado"})
-    }
-
-    return res.json(usuario)//en caso tal vaya todo bien entonces regresa al perfil del usuario 
-    }catch(error){
-
-        return res.status(500).json({ status: false, message: error })
+        return res.json(usuario);
+    } catch (error) {
+        return res.status(500).json({ status: false, message: error.message || error });
     }
 }
+
+
+
+const updateFullName = async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ message: "Token no proporcionado" });
+        }
+        const token = authHeader.split(' ')[1];
+        const decoded = jwt.verify(token, process.env.localkey);
+
+        const { full_name } = req.body;
+        if (!full_name) {
+            return res.status(400).json({ message: "Nuevo nombre completo requerido" });
+        }
+
+        // Actualiza el full_name
+        const usuario = await RegistrarUser.findOneAndUpdate(
+            { username: decoded.usuario },
+            { full_name: full_name },
+            { new: true, select: '-password' }
+        );
+
+        if (!usuario) {
+            return res.status(404).json({ message: "Usuario no encontrado" });
+        }
+
+        return res.json(usuario);
+    } catch (error) {
+        return res.status(500).json({ status: false, message: error.message || error });
+    }
+};
+
 module.exports={
     CrearUser,
     login,
-    autenticacionControl
+    autenticacionControl,
+    updateFullName
 }
