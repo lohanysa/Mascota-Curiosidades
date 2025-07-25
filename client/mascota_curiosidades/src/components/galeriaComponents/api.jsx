@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const API_AllImages = () => {
   const [images, setImages] = useState([]);
@@ -12,7 +12,7 @@ const API_AllImages = () => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           },
-        });
+        })
 
         if (!response.ok) {
           throw new Error('Error al obtener las imágenes');
@@ -25,19 +25,37 @@ const API_AllImages = () => {
       }
     };
 
-    allImages();
+    allImages()
   }, []);
 
-  return (
+
+return (
     <div className="row">
-      {images.map((img, index) => (
-        <div key={index} className="col-md-4 mb-3">
-          <img src={img.url} alt={img.nombre} className="img-fluid" />
+      {images.map((img) => (
+        <div key={img._id} className="col-md-4 mb-4">
+          <div className="card h-100">
+            <img
+              src={img.imageUrl}
+              alt={img.breed}
+              className="card-img-top"
+              style={{ height: '250px', objectFit: 'cover' }}
+            />
+            <div className="card-body text-center">
+              <h5 className="card-title">{img.breed}</h5>
+              <button
+                className="btn btn-danger"
+                onClick={() => handleDelete(img._id)}
+              >
+                🗑️ Eliminar
+              </button>
+            </div>
+          </div>
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
+
 
 export default API_AllImages;
 

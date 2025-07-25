@@ -1,10 +1,10 @@
 // controllers/savedImageController.js
-const {SavedImage} = require('../models/saveImgModel');
+const SavedImage = require('../models/saveImgModel');
 const axios = require('axios')
 
 createImage = async (req, res) => {
   try {
-    conole.log('Guardando imagen:', req.body)
+
     const { imageUrl, breed, type } = req.body;
 
     const newImage = new SavedImage({ imageUrl, breed, type })

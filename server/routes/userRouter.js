@@ -5,7 +5,8 @@ const rutaUser = express.Router()
 
 rutaUser.post('/registro',UserRegistro , CrearUser)
 rutaUser.post('/login',inicio ,login)
-rutaUser.get('/profile',autenticacion, autenticacionControl)
+rutaUser.put('/profile',autenticacion, autenticacionControl)
+rutaUser.put('/update',autenticacion, autenticacionControl)
 
 module.exports={
     rutaUser

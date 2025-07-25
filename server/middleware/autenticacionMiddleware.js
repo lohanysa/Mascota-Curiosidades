@@ -55,6 +55,7 @@ const autenticacion =(req, res, next)=>{
     }
 }
 
+
 module.exports= {
     UserRegistro,
     inicio,

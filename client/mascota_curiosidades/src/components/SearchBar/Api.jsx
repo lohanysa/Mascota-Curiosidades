@@ -58,9 +58,11 @@ export const saveImage = async (imageData) => {
 
   })
 
+    console.log('Response:',response)
+
   if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || 'Error al guardar la imagen');
+    const errorData = await response.json()
+    throw new Error(errorData.error || 'Error al guardar la imagen')
   }
 
   return await response.json();
